@@ -4,38 +4,98 @@
   <title>Science Feed</title>
   <style>
     body {
-      font-family: Arial;
-      background: #f0f0f0;
       margin: 0;
+      overflow: hidden;
+      font-family: Arial;
+      background: black;
+      color: white;
     }
-    .card {
-      background: white;
-      margin: 10px;
-      padding: 10px;
-      border-radius: 10px;
+
+    .post {
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      transition: transform 0.4s ease;
     }
+
     img {
       width: 100%;
-      border-radius: 10px;
+      max-height: 70vh;
+      object-fit: cover;
     }
   </style>
 </head>
 
 <body>
 
-<h2 style="text-align:center;">🔬 Science Feed</h2>
+<div id="feed"></div>
 
-<div class="card">
-  <img src="https://via.placeholder.com/400">
-  <h3>Photosynthesis 🌱</h3>
-  <p>Plants use sunlight to make food.</p>
-</div>
+<script>
+const posts = [
+  {id:1,img:"https://via.placeholder.com/400",title:"Photosynthesis 🌱",desc:"Plants make food"},
+  {id:2,img:"https://via.placeholder.com/400",title:"Brain 🧠",desc:"Controls body"},
+  {id:3,img:"https://via.placeholder.com/400",title:"DNA 🧬",desc:"Genetic info"},
+  {id:4,img:"https://via.placeholder.com/400",title:"Gravity 🌍",desc:"Pull force"},
+  {id:5,img:"https://via.placeholder.com/400",title:"Atoms ⚛️",desc:"Basic unit"},
+  {id:6,img:"https://via.placeholder.com/400",title:"Solar System ☀️",desc:"Planets orbit sun"},
+  {id:7,img:"https://via.placeholder.com/400",title:"Water Cycle 💧",desc:"Rain process"},
+  {id:8,img:"https://via.placeholder.com/400",title:"Electricity ⚡",desc:"Energy flow"},
+  {id:9,img:"https://via.placeholder.com/400",title:"Cells 🔬",desc:"Unit of life"},
+  {id:10,img:"https://via.placeholder.com/400",title:"Evolution 🧬",desc:"Species change"}
+];
 
-<div class="card">
-  <img src="https://via.placeholder.com/400">
-  <h3>Human Brain 🧠</h3>
-  <p>Controls the entire body.</p>
-</div>
+let currentIndex = localStorage.getItem("currentIndex") || 0;
+currentIndex = parseInt(currentIndex);
+
+const feed = document.getElementById("feed");
+
+function renderPosts() {
+  feed.innerHTML = "";
+
+  posts.forEach((post, index) => {
+    let div = document.createElement("div");
+    div.className = "post";
+
+    let offset = index - currentIndex;
+    div.style.transform = `translateY(${offset * 100}vh)`;
+
+    div.innerHTML = `
+      <img src="${post.img}">
+      <h2>${post.title}</h2>
+      <p>${post.desc}</p>
+    `;
+
+    feed.appendChild(div);
+  });
+}
+
+renderPosts();
+
+// touch swipe
+let startY = 0;
+
+document.addEventListener("touchstart", e => {
+  startY = e.touches[0].clientY;
+});
+
+document.addEventListener("touchend", e => {
+  let endY = e.changedTouches[0].clientY;
+  let diff = startY - endY;
+
+  if (diff > 50 && currentIndex < posts.length - 1) {
+    currentIndex++; // swipe up
+  } else if (diff < -50 && currentIndex > 0) {
+    currentIndex--; // swipe down
+  }
+
+  localStorage.setItem("currentIndex", currentIndex);
+  renderPosts();
+});
+</script>
 
 </body>
 </html>
