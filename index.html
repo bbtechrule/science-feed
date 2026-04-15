@@ -8,9 +8,9 @@
   <style>
     body {
       margin: 0;
-      font-family: Arial;
       overflow: hidden;
       background: black;
+      font-family: Arial;
       color: white;
     }
 
@@ -27,12 +27,12 @@
       z-index: 10;
     }
 
-    /* Post */
+    /* Fullscreen post */
     .post {
       position: absolute;
       top: 0;
-      height: 100vh;
       width: 100%;
+      height: 100vh;
       transition: transform 0.4s ease;
     }
 
@@ -53,14 +53,8 @@
       border-radius: 8px;
     }
 
-    h3 {
-      margin: 0 0 5px;
-    }
-
-    p {
-      margin: 0;
-      font-size: 14px;
-    }
+    h3 { margin: 0; }
+    p { margin: 5px 0 0; font-size: 14px; }
   </style>
 </head>
 
@@ -72,16 +66,36 @@
 
 <script>
 const posts = [
-  {id:1,img:"https://via.placeholder.com/600x900",title:"Photosynthesis 🌱",desc:"Plants use sunlight to make food."},
-  {id:2,img:"https://via.placeholder.com/600x900",title:"Human Brain 🧠",desc:"Controls all body functions."},
-  {id:3,img:"https://via.placeholder.com/600x900",title:"DNA 🧬",desc:"Carries genetic information."},
-  {id:4,img:"https://via.placeholder.com/600x900",title:"Gravity 🌍",desc:"Force that pulls objects."},
-  {id:5,img:"https://via.placeholder.com/600x900",title:"Atoms ⚛️",desc:"Basic unit of matter."},
-  {id:6,img:"https://via.placeholder.com/600x900",title:"Solar System ☀️",desc:"Planets orbit the Sun."},
-  {id:7,img:"https://via.placeholder.com/600x900",title:"Water Cycle 💧",desc:"Evaporation and rain."},
-  {id:8,img:"https://via.placeholder.com/600x900",title:"Electricity ⚡",desc:"Flow of charge."},
-  {id:9,img:"https://via.placeholder.com/600x900",title:"Cells 🔬",desc:"Basic unit of life."},
-  {id:10,img:"https://via.placeholder.com/600x900",title:"Evolution 🧬",desc:"Species change over time."}
+  {
+    id:1,
+    img:"https://picsum.photos/600/1000?random=1",
+    title:"Photosynthesis 🌱",
+    desc:"Plants use sunlight to make food."
+  },
+  {
+    id:2,
+    img:"https://picsum.photos/600/1000?random=2",
+    title:"Human Brain 🧠",
+    desc:"Controls body functions."
+  },
+  {
+    id:3,
+    img:"https://picsum.photos/600/1000?random=3",
+    title:"DNA 🧬",
+    desc:"Genetic material."
+  },
+  {
+    id:4,
+    img:"https://picsum.photos/600/1000?random=4",
+    title:"Gravity 🌍",
+    desc:"Pulling force."
+  },
+  {
+    id:5,
+    img:"https://picsum.photos/600/1000?random=5",
+    title:"Atoms ⚛️",
+    desc:"Basic unit of matter."
+  }
 ];
 
 let currentIndex = localStorage.getItem("currentIndex") || 0;
@@ -113,7 +127,7 @@ function renderPosts() {
 
 renderPosts();
 
-// Swipe
+// Swipe control
 let startY = 0;
 
 document.addEventListener("touchstart", e => {
