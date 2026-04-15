@@ -3,63 +3,88 @@
 <head>
   <title>Science Feed</title>
 
-  <!-- IMPORTANT: Mobile view -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
     body {
       margin: 0;
-      overflow: hidden;
       font-family: Arial;
-      background: black;
-      color: white;
-      touch-action: none;
+      background: #f5f5f5;
+      overflow: hidden;
     }
 
-    .post {
-      height: 100vh;
-      width: 100%;
-      position: absolute;
+    /* Header */
+    .header {
+      height: 60px;
+      background: black;
+      color: white;
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      padding: 0 15px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    /* Post container */
+    .post {
+      position: absolute;
+      top: 60px;
+      height: calc(100vh - 60px);
+      width: 100%;
+      display: flex;
       justify-content: center;
       align-items: center;
-      transition: transform 0.35s ease;
+      transition: transform 0.4s ease;
+    }
+
+    /* Card style */
+    .card {
+      width: 90%;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
 
     img {
       width: 100%;
-      max-height: 70vh;
+      height: 200px;
       object-fit: cover;
     }
 
-    h2 {
-      margin: 10px 0 5px;
+    .content {
+      padding: 15px;
+    }
+
+    h3 {
+      margin: 0 0 10px;
     }
 
     p {
-      margin: 0 15px;
-      text-align: center;
+      margin: 0;
+      color: #555;
     }
   </style>
 </head>
 
 <body>
 
+<div class="header">🔬 Science Feed</div>
+
 <div id="feed"></div>
 
 <script>
 const posts = [
-  {id:1,img:"https://via.placeholder.com/400",title:"Photosynthesis 🌱",desc:"Plants make food"},
-  {id:2,img:"https://via.placeholder.com/400",title:"Brain 🧠",desc:"Controls body"},
-  {id:3,img:"https://via.placeholder.com/400",title:"DNA 🧬",desc:"Genetic info"},
-  {id:4,img:"https://via.placeholder.com/400",title:"Gravity 🌍",desc:"Pull force"},
-  {id:5,img:"https://via.placeholder.com/400",title:"Atoms ⚛️",desc:"Basic unit"},
-  {id:6,img:"https://via.placeholder.com/400",title:"Solar System ☀️",desc:"Planets orbit sun"},
-  {id:7,img:"https://via.placeholder.com/400",title:"Water Cycle 💧",desc:"Rain process"},
-  {id:8,img:"https://via.placeholder.com/400",title:"Electricity ⚡",desc:"Energy flow"},
-  {id:9,img:"https://via.placeholder.com/400",title:"Cells 🔬",desc:"Unit of life"},
-  {id:10,img:"https://via.placeholder.com/400",title:"Evolution 🧬",desc:"Species change"}
+  {id:1,img:"https://via.placeholder.com/400",title:"Photosynthesis 🌱",desc:"Plants use sunlight to make food."},
+  {id:2,img:"https://via.placeholder.com/400",title:"Human Brain 🧠",desc:"Controls all body functions."},
+  {id:3,img:"https://via.placeholder.com/400",title:"DNA 🧬",desc:"Carries genetic information."},
+  {id:4,img:"https://via.placeholder.com/400",title:"Gravity 🌍",desc:"Force that pulls objects."},
+  {id:5,img:"https://via.placeholder.com/400",title:"Atoms ⚛️",desc:"Basic unit of matter."},
+  {id:6,img:"https://via.placeholder.com/400",title:"Solar System ☀️",desc:"Planets orbit the Sun."},
+  {id:7,img:"https://via.placeholder.com/400",title:"Water Cycle 💧",desc:"Evaporation and rain."},
+  {id:8,img:"https://via.placeholder.com/400",title:"Electricity ⚡",desc:"Flow of electric charge."},
+  {id:9,img:"https://via.placeholder.com/400",title:"Cells 🔬",desc:"Basic unit of life."},
+  {id:10,img:"https://via.placeholder.com/400",title:"Evolution 🧬",desc:"Species change over time."}
 ];
 
 let currentIndex = localStorage.getItem("currentIndex") || 0;
@@ -78,9 +103,13 @@ function renderPosts() {
     div.style.transform = `translateY(${offset * 100}vh)`;
 
     div.innerHTML = `
-      <img src="${post.img}">
-      <h2>${post.title}</h2>
-      <p>${post.desc}</p>
+      <div class="card">
+        <img src="${post.img}">
+        <div class="content">
+          <h3>${post.title}</h3>
+          <p>${post.desc}</p>
+        </div>
+      </div>
     `;
 
     feed.appendChild(div);
@@ -101,10 +130,10 @@ document.addEventListener("touchend", e => {
   let diff = startY - endY;
 
   if (diff > 50 && currentIndex < posts.length - 1) {
-    currentIndex++; // swipe up
+    currentIndex++;
   } 
   else if (diff < -50 && currentIndex > 0) {
-    currentIndex--; // swipe down
+    currentIndex--;
   }
 
   localStorage.setItem("currentIndex", currentIndex);
