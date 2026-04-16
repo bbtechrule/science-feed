@@ -14,7 +14,6 @@
       color: white;
     }
 
-    /* Header */
     .header {
       position: fixed;
       top: 0;
@@ -27,7 +26,6 @@
       z-index: 10;
     }
 
-    /* Fullscreen post */
     .post {
       position: absolute;
       top: 0;
@@ -36,13 +34,14 @@
       transition: transform 0.4s ease;
     }
 
+    /* ✅ FIXED IMAGE */
     img {
       width: 100%;
       height: 100vh;
-      object-fit: cover;
+      object-fit: contain;
+      background: black;
     }
 
-    /* Text overlay */
     .overlay {
       position: absolute;
       bottom: 20px;
@@ -64,7 +63,6 @@
 
 <div id="feed"></div>
 
-<!-- ✅ Load images from separate file -->
 <script src="images.js"></script>
 
 <script>
@@ -97,7 +95,7 @@ function renderPosts() {
 
 renderPosts();
 
-// Swipe system
+// Swipe
 let startY = 0;
 
 document.addEventListener("touchstart", e => {
