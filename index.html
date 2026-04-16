@@ -1,3 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Science Feed</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: black;
+      font-family: Arial;
+      color: white;
+    }
+
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: 50px;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      align-items: center;
+      padding-left: 15px;
+      z-index: 10;
+    }
+
+    /* Fullscreen post */
+    .post {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100vh;
+      transition: transform 0.4s ease;
+    }
+
+    img {
+      width: 100%;
+      height: 100vh;
+      object-fit: cover;
+    }
+
+    /* Text overlay */
+    .overlay {
+      position: absolute;
+      bottom: 20px;
+      left: 15px;
+      right: 15px;
+      background: rgba(0,0,0,0.5);
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    h3 { margin: 0; }
+    p { margin: 5px 0 0; font-size: 14px; }
+  </style>
+</head>
+
+<body>
+
+<div class="header">🔬 Science Feed</div>
+
+<div id="feed"></div>
+
+<!-- ✅ Load images from separate file -->
 <script src="images.js"></script>
 
 <script>
@@ -30,7 +97,7 @@ function renderPosts() {
 
 renderPosts();
 
-// Swipe
+// Swipe system
 let startY = 0;
 
 document.addEventListener("touchstart", e => {
@@ -52,3 +119,6 @@ document.addEventListener("touchend", e => {
   renderPosts();
 });
 </script>
+
+</body>
+</html>
