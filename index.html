@@ -1,174 +1,95 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Science Feed</title>
+  <title>zerotoin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
     body {
       margin: 0;
-      overflow: hidden;
       background: black;
       font-family: Arial;
-      color: white;
+      display: flex;
+      justify-content: center;
     }
 
+    /* App container */
+    .app {
+      width: 100%;
+      max-width: 420px;
+      height: 100vh;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      position: relative;
+    }
+
+    /* Desktop mode */
+    @media (min-width: 768px) {
+      .app {
+        border: 2px solid #333;
+        border-radius: 10px;
+      }
+    }
+
+    /* Each post */
+    .post {
+      height: 100vh;
+      position: relative;
+      scroll-snap-align: start;
+    }
+
+    /* Image full screen */
+    .post img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Header */
     .header {
       position: fixed;
       top: 0;
+      left: 0;
       width: 100%;
-      height: 50px;
-      background: rgba(0,0,0,0.7);
-      display: flex;
-      align-items: center;
-      padding-left: 15px;
+      max-width: 420px;
+      padding: 12px;
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
       z-index: 10;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent);
     }
 
-    .post {
-      position: absolute;
-      top: 0;
-      width: 100%;
-      height: 100vh;
-      transition: transform 0.4s ease;
-    }
-
-    img {
-      width: 100%;
-      height: 100vh;
-      object-fit: contain;
-      background: black;
-    }
-
-    .overlay {
-      position: absolute;
-      bottom: 20px;
-      left: 15px;
-      right: 15px;
-      background: rgba(0,0,0,0.5);
-      padding: 10px;
-      border-radius: 8px;
-      max-height: 40vh;
-      overflow-y: auto;
-    }
-
-    h3 { margin: 0; }
-    p { margin: 5px 0 0; font-size: 14px; }
   </style>
 </head>
 
 <body>
 
-<div class="header">🔬 Science Feed</div>
-<div id="feed"></div>
+<div class="app">
+
+  <div class="header">zerotoin</div>
+
+  <div id="feed"></div>
+
+</div>
+
+<script src="images.js"></script>
 
 <script>
-// ✅ Your posts
-let posts = [
-  {
-    id: 1,
-    img: "https://res.cloudinary.com/dujoufris/image/upload/v1769152609/cell_1.png_pfomgd.jpg",
-    title: "Cells 🔬",
-    desc: "Basic unit of life."
-  },
-  {
-    id: 2,
-    img: "https://picsum.photos/600/1000?random=2",
-    title: "DNA 🧬",
-    desc: "Carries genetic information."
-  },
-  {
-    id: 3,
-    img: "https://picsum.photos/600/1000?random=3",
-    title: "Brain 🧠",
-    desc: "Controls all body functions."
-  },
-  {
-    id: 4,
-    img: "https://picsum.photos/600/1000?random=4",
-    title: "Photosynthesis 🌱",
-    desc: "Plants make food using sunlight."
-  },
-  {
-    id: 5,
-    img: "https://picsum.photos/600/1000?random=5",
-    title: "Gravity 🌍",
-    desc: "Force that pulls objects."
-  }
-];
+  const feed = document.getElementById("feed");
 
-// ✅ Load Health Benefits from txt
-async function loadPosts() {
-  try {
-    const res = await fetch("https://res.cloudinary.com/dujoufris/raw/upload/v1776756005/Here_are_some_important_health_benefits_you_should_know_simple_a..._obagsk.txt");
-    const text = await res.text();
+  if (typeof posts === "undefined" || posts.length === 0) {
+    feed.innerHTML = "<h2 style='color:white;text-align:center'>No images</h2>";
+  } else {
+    posts.forEach(url => {
+      const div = document.createElement("div");
+      div.className = "post";
 
-    posts.push({
-      id: 6,
-      img: "https://picsum.photos/600/1000?random=6",
-      title: "Health Benefits 💪",
-      desc: text
+      div.innerHTML = `<img src="${url}" />`;
+
+      feed.appendChild(div);
     });
-
-  } catch (error) {
-    console.error("Error loading text file:", error);
   }
-}
-
-// ✅ Render posts
-let currentIndex = localStorage.getItem("currentIndex") || 0;
-currentIndex = parseInt(currentIndex);
-
-const feed = document.getElementById("feed");
-
-function renderPosts() {
-  feed.innerHTML = "";
-
-  posts.forEach((post, index) => {
-    let div = document.createElement("div");
-    div.className = "post";
-
-    let offset = index - currentIndex;
-    div.style.transform = `translateY(${offset * 100}vh)`;
-
-    div.innerHTML = `
-      <img src="${post.img}">
-      <div class="overlay">
-        <h3>${post.title}</h3>
-        <p>${post.desc}</p>
-      </div>
-    `;
-
-    feed.appendChild(div);
-  });
-}
-
-// ✅ Swipe control
-let startY = 0;
-
-document.addEventListener("touchstart", e => {
-  startY = e.touches[0].clientY;
-});
-
-document.addEventListener("touchend", e => {
-  let endY = e.changedTouches[0].clientY;
-  let diff = startY - endY;
-
-  if (diff > 50 && currentIndex < posts.length - 1) {
-    currentIndex++;
-  } 
-  else if (diff < -50 && currentIndex > 0) {
-    currentIndex--;
-  }
-
-  localStorage.setItem("currentIndex", currentIndex);
-  renderPosts();
-});
-
-// ✅ Load then render
-loadPosts().then(() => {
-  renderPosts();
-});
 </script>
 
 </body>
