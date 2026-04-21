@@ -32,3 +32,23 @@ const posts = [
     desc: "Force that pulls objects."
   }
 ];
+
+// Function to fetch text file and add new post
+export async function loadPosts() {
+  try {
+    const res = await fetch("https://res.cloudinary.com/dujoufris/raw/upload/v1776756005/Here_are_some_important_health_benefits_you_should_know_simple_a..._obagsk.txt");
+    const text = await res.text();
+
+    posts.push({
+      id: 6,
+      img: "https://picsum.photos/600/1000?random=6",
+      title: "Health Benefits 💪",
+      desc: text
+    });
+
+    return posts;
+  } catch (error) {
+    console.error("Error loading text file:", error);
+    return posts;
+  }
+}
