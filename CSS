@@ -1,0 +1,42 @@
+body {
+  margin: 0;
+  background: black;
+  overflow: hidden;
+}
+
+.app {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+}
+
+.post {
+  position: relative;
+  height: 100vh;
+  scroll-snap-align: start;
+}
+
+.post img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* LEFT SIDE BUTTONS */
+.actions {
+  position: absolute;
+  left: 10px;
+  bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.actions button {
+  background: rgba(0,0,0,0.5);
+  border: none;
+  color: white;
+  font-size: 24px;
+  padding: 10px;
+  border-radius: 50%;
+}
