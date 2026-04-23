@@ -1,26 +1,84 @@
-
 <!DOCTYPE html>
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Insta UI</title>
-  <link rel="stylesheet" href="style.css">
+
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      display: flex;
+      justify-content: center;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 400px;
+      height: 100vh;
+      position: relative;
+    }
+
+    .post-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .left-buttons {
+      position: absolute;
+      left: 10px;
+      bottom: 100px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    button {
+      background: rgba(0,0,0,0.5);
+      border: none;
+      color: white;
+      font-size: 22px;
+      padding: 12px;
+      border-radius: 50%;
+    }
+  </style>
 </head>
+
 <body>
 
 <div class="app">
-  <div class="post">
-    
-    <img src="https://res.cloudinary.com/your-cloud-name/image/upload/sample.jpg" class="post-img">
+  <!-- 🔴 IMPORTANT: Replace with YOUR Cloudinary image -->
+  <img src="https://res.cloudinary.com/demo/image/upload/sample.jpg" class="post-img">
 
-    <div class="left-buttons">
-      <button class="like">❤️</button>
-      <button class="share">🔗</button>
-    </div>
-
+  <div class="left-buttons">
+    <button id="like">❤️</button>
+    <button id="share">🔗</button>
   </div>
 </div>
 
-<script src="script.js"></script>
+<script>
+  const likeBtn = document.getElementById("like");
+  const shareBtn = document.getElementById("share");
+
+  let liked = false;
+
+  likeBtn.onclick = () => {
+    liked = !liked;
+    likeBtn.innerHTML = liked ? "💖" : "❤️";
+  };
+
+  shareBtn.onclick = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: "Image",
+        url: window.location.href
+      });
+    } else {
+      alert("Share not supported on this device");
+    }
+  };
+</script>
+
 </body>
 </html>
