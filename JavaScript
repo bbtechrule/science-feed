@@ -1,0 +1,18 @@
+document.querySelectorAll(".like").forEach(btn => {
+  btn.addEventListener("click", () => {
+    btn.style.color = btn.style.color === "red" ? "white" : "red";
+  });
+});
+
+document.querySelectorAll(".share").forEach(btn => {
+  btn.addEventListener("click", () => {
+    if (navigator.share) {
+      navigator.share({
+        title: "Check this image",
+        url: window.location.href
+      });
+    } else {
+      alert("Sharing not supported");
+    }
+  });
+});
