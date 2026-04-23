@@ -11,7 +11,7 @@
       font-family: Arial;
     }
 
-    /* TOP HEADING */
+    /* HEADER */
     .header {
       position: fixed;
       top: 0;
@@ -24,28 +24,25 @@
       z-index: 10;
     }
 
-    /* MAIN APP */
-    .app {
-      height: 100vh;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding-top: 50px;   /* space for header */
-      padding-bottom: 20px; /* bottom gap */
-      box-sizing: border-box;
+    /* POSTS CONTAINER (scroll like reels) */
+    #post-container {
+      margin-top: 50px;
+      height: calc(100vh - 50px);
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
     }
 
     .post {
       width: 100%;
       height: 100%;
       position: relative;
+      scroll-snap-align: start;
     }
 
     .post-img {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* 🔥 THIS FIXES YOUR ISSUE */
+      object-fit: cover;
     }
 
     /* LEFT BUTTONS */
@@ -71,45 +68,14 @@
 
 <body>
 
-<!-- 🔝 HEADER -->
+<!-- HEADER -->
 <div class="header">zerotoin.com</div>
 
-<div class="app">
-  <div class="post">
-    
-    <!-- 🔴 Replace with your Cloudinary image -->
-    <img src="https://res.cloudinary.com/demo/image/upload/sample.jpg" class="post-img">
+<!-- 🔥 DYNAMIC POSTS -->
+<div id="post-container"></div>
 
-    <div class="left-buttons">
-      <button id="like">❤️</button>
-      <button id="share">🔗</button>
-    </div>
-
-  </div>
-</div>
-
-<script>
-  const likeBtn = document.getElementById("like");
-  const shareBtn = document.getElementById("share");
-
-  let liked = false;
-
-  likeBtn.onclick = () => {
-    liked = !liked;
-    likeBtn.innerHTML = liked ? "💖" : "❤️";
-  };
-
-  shareBtn.onclick = () => {
-    if (navigator.share) {
-      navigator.share({
-        title: "Check this",
-        url: window.location.href
-      });
-    } else {
-      alert("Share not supported");
-    }
-  };
-</script>
+<!-- 🔗 IMAGE JS -->
+<script src="image.js"></script>
 
 </body>
 </html>
