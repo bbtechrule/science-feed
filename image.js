@@ -1,5 +1,5 @@
 const images = [
-  "https://res.cloudinary.com/demo/image/upload/sample.jpg",
+  "https://res.cloudinary.com/dujoufris/image/upload/v1769147997/cld-sample-5.jpg",
   "https://res.cloudinary.com/demo/image/upload/sample.jpg",
   "https://res.cloudinary.com/demo/image/upload/sample.jpg"
 ];
