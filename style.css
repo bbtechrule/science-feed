@@ -1,13 +1,64 @@
+body {
+  margin: 0;
+  background: black;
+  font-family: Arial;
+  overflow: hidden;
+}
+
+/* HEADER */
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  padding: 10px 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 10;
+}
+
+/* REELS CONTAINER */
+#post-container {
+  margin-top: 50px;
+  height: calc(100vh - 50px);
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+/* EACH POST = FULL SCREEN */
 .post {
   width: 100%;
-  max-width: 400px;
-  aspect-ratio: 9/16;   /* fixed Instagram size */
+  height: 100vh;
   position: relative;
+  scroll-snap-align: start;
   background: black;
 }
 
+/* IMAGE */
 .post-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;   /* or use 'contain' if you don’t want crop */
+  object-fit: cover;
+}
+
+/* LEFT BUTTONS */
+.left-buttons {
+  position: absolute;
+  left: 10px;
+  bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* BUTTON STYLE */
+button {
+  background: rgba(0,0,0,0.5);
+  border: none;
+  color: white;
+  font-size: 20px;
+  padding: 12px;
+  border-radius: 50%;
 }
