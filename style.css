@@ -2,7 +2,6 @@ body {
   margin: 0;
   background: black;
   font-family: Arial;
-  overflow: hidden;
 }
 
 /* HEADER */
@@ -18,7 +17,7 @@ body {
   z-index: 10;
 }
 
-/* REELS CONTAINER */
+/* SCROLL CONTAINER */
 #post-container {
   margin-top: 50px;
   height: calc(100vh - 50px);
@@ -27,17 +26,31 @@ body {
   scroll-behavior: smooth;
 }
 
-/* EACH POST = FULL SCREEN */
+/* EACH POST */
 .post {
   width: 100%;
   height: 100vh;
-  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   scroll-snap-align: start;
   background: black;
 }
 
-/* IMAGE */
-.post-img {
+/* SHORTS BOX (9:16) */
+.media-box {
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 9/16;
+  position: relative;
+  background: black;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+/* MEDIA */
+.post-img,
+.post-video {
   width: 100%;
   height: 100%;
   object-fit: cover;
