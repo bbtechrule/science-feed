@@ -15,24 +15,26 @@ const media = [
 
 const container = document.getElementById("post-container");
 
-media.forEach((item) => {
+let currentIndex = 0;
+let startY = 0;
+
+// CREATE POSTS
+media.forEach((item, index) => {
   const post = document.createElement("div");
   post.className = "post";
+  post.style.transform = `translateY(${index * 100}%)`;
 
   const box = document.createElement("div");
   box.className = "media-box";
 
   let mediaElement;
 
-  // IMAGE
   if (item.type === "image") {
     mediaElement = document.createElement("img");
     mediaElement.src = item.url;
     mediaElement.className = "post-img";
-    mediaElement.loading = "lazy";
   }
 
-  // VIDEO
   if (item.type === "video") {
     mediaElement = document.createElement("video");
     mediaElement.src = item.url;
@@ -43,7 +45,6 @@ media.forEach((item) => {
     mediaElement.playsInline = true;
   }
 
-  // BUTTONS
   const buttons = document.createElement("div");
   buttons.className = "left-buttons";
 
@@ -79,3 +80,41 @@ media.forEach((item) => {
   post.appendChild(box);
   container.appendChild(post);
 });
+
+const posts = document.querySelectorAll(".post");
+
+// TOUCH EVENTS
+container.addEventListener("touchstart", (e) => {
+  startY = e.touches[0].clientY;
+});
+
+container.addEventListener("touchend", (e) => {
+  let endY = e.changedTouches[0].clientY;
+  let diff = startY - endY;
+
+  if (diff > 50) nextPost();     // swipe up
+  if (diff < -50) prevPost();    // swipe down
+});
+
+// UPDATE POSITION
+function updatePosts() {
+  posts.forEach((post, index) => {
+    post.style.transform = `translateY(${(index - currentIndex) * 100}%)`;
+  });
+}
+
+// NEXT
+function nextPost() {
+  if (currentIndex < posts.length - 1) {
+    currentIndex++;
+    updatePosts();
+  }
+}
+
+// PREV
+function prevPost() {
+  if (currentIndex > 0) {
+    currentIndex--;
+    updatePosts();
+  }
+}
