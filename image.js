@@ -1,19 +1,49 @@
-const images = [
-  "https://res.cloudinary.com/dujoufris/image/upload/v1769147997/cld-sample-5.jpg",
-  "https://res.cloudinary.com/dujoufris/image/upload/v1769152609/cell_1.png_pfomgd.jpg",
-  "https://res.cloudinary.com/demo/image/upload/sample.jpg"
+const media = [
+  {
+    type: "image",
+    url: "https://res.cloudinary.com/dujoufris/image/upload/v1769147997/cld-sample-5.jpg"
+  },
+  {
+    type: "image",
+    url: "https://res.cloudinary.com/dujoufris/image/upload/v1769152609/cell_1.png_pfomgd.jpg"
+  },
+  {
+    type: "video",
+    url: "https://www.w3schools.com/html/mov_bbb.mp4"
+  }
 ];
 
 const container = document.getElementById("post-container");
 
-images.forEach((url) => {
+media.forEach((item) => {
   const post = document.createElement("div");
   post.className = "post";
 
-  const img = document.createElement("img");
-  img.src = url;
-  img.className = "post-img";
+  const box = document.createElement("div");
+  box.className = "media-box";
 
+  let mediaElement;
+
+  // IMAGE
+  if (item.type === "image") {
+    mediaElement = document.createElement("img");
+    mediaElement.src = item.url;
+    mediaElement.className = "post-img";
+    mediaElement.loading = "lazy";
+  }
+
+  // VIDEO
+  if (item.type === "video") {
+    mediaElement = document.createElement("video");
+    mediaElement.src = item.url;
+    mediaElement.className = "post-video";
+    mediaElement.autoplay = true;
+    mediaElement.loop = true;
+    mediaElement.muted = true;
+    mediaElement.playsInline = true;
+  }
+
+  // BUTTONS
   const buttons = document.createElement("div");
   buttons.className = "left-buttons";
 
@@ -33,7 +63,7 @@ images.forEach((url) => {
     if (navigator.share) {
       navigator.share({
         title: "Check this",
-        url: url
+        url: item.url
       });
     } else {
       alert("Share not supported");
@@ -43,8 +73,9 @@ images.forEach((url) => {
   buttons.appendChild(likeBtn);
   buttons.appendChild(shareBtn);
 
-  post.appendChild(img);
-  post.appendChild(buttons);
+  box.appendChild(mediaElement);
+  box.appendChild(buttons);
 
+  post.appendChild(box);
   container.appendChild(post);
 });
