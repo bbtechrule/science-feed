@@ -2,68 +2,9 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Insta UI</title>
+  <title>Shorts UI</title>
 
-  <style>
-    body {
-      margin: 0;
-      background: black;
-      font-family: Arial;
-    }
-
-    /* HEADER */
-    .header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      text-align: center;
-      color: white;
-      font-size: 18px;
-      padding: 10px 0;
-      background: rgba(0,0,0,0.6);
-      z-index: 10;
-    }
-
-    /* POSTS CONTAINER (scroll like reels) */
-    #post-container {
-      margin-top: 50px;
-      height: calc(100vh - 50px);
-      overflow-y: scroll;
-      scroll-snap-type: y mandatory;
-    }
-
-    .post {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      scroll-snap-align: start;
-    }
-
-    .post-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* LEFT BUTTONS */
-    .left-buttons {
-      position: absolute;
-      left: 10px;
-      bottom: 80px;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    button {
-      background: rgba(0,0,0,0.5);
-      border: none;
-      color: white;
-      font-size: 20px;
-      padding: 12px;
-      border-radius: 50%;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -71,10 +12,10 @@
 <!-- HEADER -->
 <div class="header">zerotoin.com</div>
 
-<!-- 🔥 DYNAMIC POSTS -->
+<!-- POSTS -->
 <div id="post-container"></div>
 
-<!-- 🔗 IMAGE JS -->
+<!-- SCRIPT -->
 <script src="image.js"></script>
 
 </body>
