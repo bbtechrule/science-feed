@@ -1,3 +1,4 @@
+/* RESET */
 body {
   margin: 0;
   background: black;
@@ -5,7 +6,7 @@ body {
   overflow: hidden; /* ❌ no scroll */
 }
 
-/* HEADER */
+/* HEADER (overlay on video) */
 .header {
   position: fixed;
   top: 0;
@@ -13,44 +14,50 @@ body {
   text-align: center;
   color: white;
   font-size: 18px;
-  padding: 10px 0;
-  background: rgba(0,0,0,0.6);
+  padding: 12px 0;
+
+  /* 🔥 nice gradient like YouTube Shorts */
+  background: linear-gradient(to bottom, rgba(0,0,0,0.7), transparent);
+
   z-index: 10;
 }
 
-/* CONTAINER */
+/* CONTAINER (no gap now) */
 #post-container {
-  margin-top: 50px;
-  height: calc(100vh - 50px);
+  height: 100vh;        /* ✅ full screen */
   position: relative;
   overflow: hidden;
 }
 
-/* POSTS */
+/* EACH POST */
 .post {
   width: 100%;
-  height: calc(100vh - 50px);
+  height: 100vh;        /* ✅ full height */
   position: absolute;
   top: 0;
   left: 0;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
   background: black;
   transition: transform 0.4s ease;
 }
 
-/* SHORTS BOX */
+/* SHORTS VIDEO BOX */
 .media-box {
   width: 100%;
-  max-width: 360px;
-  height: 640px;
+  max-width: 360px;     /* mobile width */
+  height: 100vh;        /* 🔥 fills top to bottom */
+
   position: relative;
   overflow: hidden;
-  border-radius: 12px;
+
+  border-radius: 0;     /* 🔥 remove curve (optional) */
 }
 
-/* MEDIA */
+/* IMAGE + VIDEO */
 .post-img,
 .post-video {
   width: 100%;
@@ -58,16 +65,18 @@ body {
   object-fit: cover;
 }
 
-/* BUTTONS */
+/* LEFT BUTTONS */
 .left-buttons {
   position: absolute;
   left: 10px;
   bottom: 80px;
+
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
+/* BUTTON STYLE */
 button {
   background: rgba(0,0,0,0.5);
   border: none;
