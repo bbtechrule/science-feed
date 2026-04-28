@@ -45,38 +45,9 @@ media.forEach((item, index) => {
     mediaElement.playsInline = true;
   }
 
-  const buttons = document.createElement("div");
-  buttons.className = "left-buttons";
-
-  const likeBtn = document.createElement("button");
-  likeBtn.innerHTML = "❤️";
-
-  let liked = false;
-  likeBtn.onclick = () => {
-    liked = !liked;
-    likeBtn.innerHTML = liked ? "💖" : "❤️";
-  };
-
-  const shareBtn = document.createElement("button");
-  shareBtn.innerHTML = "🔗";
-
-  shareBtn.onclick = () => {
-    if (navigator.share) {
-      navigator.share({
-        title: "Check this",
-        url: item.url
-      });
-    } else {
-      alert("Share not supported");
-    }
-  };
-
-  buttons.appendChild(likeBtn);
-  buttons.appendChild(shareBtn);
+  // ❌ Buttons removed
 
   box.appendChild(mediaElement);
-  box.appendChild(buttons);
-
   post.appendChild(box);
   container.appendChild(post);
 });
@@ -92,8 +63,8 @@ container.addEventListener("touchend", (e) => {
   let endY = e.changedTouches[0].clientY;
   let diff = startY - endY;
 
-  if (diff > 50) nextPost();     // swipe up
-  if (diff < -50) prevPost();    // swipe down
+  if (diff > 50) nextPost();
+  if (diff < -50) prevPost();
 });
 
 // UPDATE POSITION
