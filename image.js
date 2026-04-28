@@ -9,7 +9,7 @@ const media = [
   },
   {
     type: "video",
-    url: "https://www.w3schools.com/html/mov_bbb.mp4"
+    url: "https://res.cloudinary.com/dujoufris/video/upload/v1777402211/VID_20260428_114405_631_lsgfyt.mp4"
   }
 ];
 
