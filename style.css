@@ -21,8 +21,7 @@ body {
 
 /* CONTAINER */
 #post-container {
-  margin-top: 50px; /* ✅ space for header */
-  height: calc(100vh - 50px);
+  height: 100vh;              /* 🔥 full screen */
   position: relative;
   overflow: hidden;
 }
@@ -30,42 +29,40 @@ body {
 /* EACH POST */
 .post {
   width: 100%;
-  height: calc(100vh - 50px);
+  height: 100vh;              /* 🔥 full screen */
   position: absolute;
   top: 0;
   left: 0;
 
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* 🔥 push to top */
-
-  padding-top: 10px; /* 🔥 small gap like your image */
+  align-items: center;        /* 🔥 FIXED (center properly) */
 
   background: black;
   transition: transform 0.4s ease;
 }
 
-/* SHORTS BOX */
+/* 🔥 SHORTS BOX (EXACT 9:16 LIKE 1080x1920) */
 .media-box {
-  width: 95%;           /* 🔥 slight margin on sides */
-  max-width: 360px;
-  aspect-ratio: 9/16;   /* 🔥 PERFECT SHORTS RATIO */
+  height: 100vh;              /* 🔥 full height */
+  aspect-ratio: 9/16;         /* 🔥 exact ratio */
+  max-width: 100vw;
 
   position: relative;
   overflow: hidden;
 
-  border-radius: 16px;  /* 🔥 rounded corners */
+  border-radius: 0;           /* 🔥 full screen look */
 }
 
-/* IMAGE / VIDEO */
+/* MEDIA */
 .post-img,
 .post-video {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover;          /* 🔥 fill like reels */
 }
 
-/* BUTTONS */
+/* OPTIONAL BUTTONS (you removed earlier, but keeping for future use) */
 .left-buttons {
   position: absolute;
   left: 10px;
