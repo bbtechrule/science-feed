@@ -24,23 +24,24 @@ body {
   background: black;
   z-index: 10;
   font-weight: 500;
+  letter-spacing: 0.5px;
 }
 
-/* POST CONTAINER - fills between header and bottom nav */
+/* POST CONTAINER - fills space between header and bottom nav */
 #post-container {
   position: fixed;
-  top: 48px;
-  bottom: 70px;
+  top: 48px;               /* height of header */
+  bottom: 70px;            /* height of bottom nav */
   left: 0;
   width: 100%;
   overflow: hidden;
   background: black;
 }
 
-/* POSTS - each takes full container */
+/* POSTS */
 .post {
   width: 100%;
-  height: 100%;
+  height: 100%;            /* relative to #post-container, not viewport */
   position: absolute;
   top: 0;
   left: 0;
@@ -51,33 +52,33 @@ body {
   transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
 }
 
-/* MEDIA BOX - fills entire post area (no side gaps) */
+/* MEDIA BOX */
 .media-box {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: black;
+  overflow: hidden;
 }
 
-/* IMAGES & VIDEOS - cover whole box, no gaps */
+/* IMAGES & VIDEOS */
 .post-img,
 .post-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;   /* fills width & height, crops if necessary */
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
   background: black;
 }
 
-/* SOUND BUTTON */
+/* SOUND BUTTON - moved up a bit */
 #sound-toggle {
   position: fixed;
   left: 15px;
-  bottom: 90px;
+  bottom: 90px;            /* above bottom nav */
   width: 52px;
   height: 52px;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(4px);
   color: white;
   display: flex;
@@ -87,6 +88,8 @@ body {
   font-size: 24px;
   z-index: 100;
   cursor: pointer;
+  transition: 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
 /* BOTTOM NAVIGATION */
@@ -96,12 +99,12 @@ body {
   left: 0;
   width: 100%;
   height: 70px;
-  background: rgba(0,0,0,0.85);
+  background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(12px);
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border-top: 0.5px solid rgba(255,255,255,0.2);
+  border-top: 0.5px solid rgba(255, 255, 255, 0.2);
   z-index: 20;
 }
 
@@ -111,8 +114,10 @@ body {
   align-items: center;
   gap: 4px;
   color: #8e8e8e;
+  transition: color 0.2s;
   cursor: pointer;
   font-size: 11px;
+  font-weight: 500;
 }
 
 .nav-item img {
@@ -120,11 +125,17 @@ body {
   height: 24px;
   filter: brightness(0) invert(1);
   opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.nav-item span {
+  font-size: 11px;
 }
 
 .nav-item.active {
   color: white;
 }
+
 .nav-item.active img {
   opacity: 1;
 }
