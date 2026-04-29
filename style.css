@@ -1,8 +1,13 @@
 /* RESET */
+* {
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
 body {
   margin: 0;
   background: black;
-  font-family: Arial;
+  font-family: Arial, Helvetica, sans-serif;
   overflow: hidden;
 }
 
@@ -10,83 +15,84 @@ body {
 .header {
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
   text-align: center;
   color: white;
   font-size: 18px;
-  padding: 10px 0;
+  padding: 12px 0;
   background: black;
   z-index: 10;
+  font-weight: 500;
+  letter-spacing: 0.5px;
 }
 
-/* CONTAINER */
+/* POST CONTAINER - fills space between header and bottom nav */
 #post-container {
-  height: 100vh;
-  position: relative;
+  position: fixed;
+  top: 48px;               /* height of header */
+  bottom: 70px;            /* height of bottom nav */
+  left: 0;
+  width: 100%;
   overflow: hidden;
+  background: black;
 }
 
 /* POSTS */
 .post {
   width: 100%;
-  height: 100vh;
+  height: 100%;            /* relative to #post-container, not viewport */
   position: absolute;
   top: 0;
   left: 0;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   background: black;
-  transition: transform 0.4s ease;
+  transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
 }
 
-/* SHORTS BOX (CENTERED 9:16) */
+/* MEDIA BOX */
 .media-box {
   width: 100%;
   height: 100%;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
-  position: relative;
   overflow: hidden;
 }
 
-/* 🔥 MEDIA FIX (NO CROP) */
+/* IMAGES & VIDEOS */
 .post-img,
 .post-video {
   max-width: 100%;
   max-height: 100%;
-  object-fit: contain;   /* ✅ FULL IMAGE/VIDEO visible */
+  object-fit: contain;
   background: black;
 }
 
-/* 🔊 SOUND BUTTON */
+/* SOUND BUTTON - moved up a bit */
 #sound-toggle {
   position: fixed;
   left: 15px;
-  bottom: 120px;
-
-  width: 55px;
-  height: 55px;
-
-  background: rgba(0,0,0,0.6);
+  bottom: 90px;            /* above bottom nav */
+  width: 52px;
+  height: 52px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
   color: white;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   border-radius: 50%;
-  font-size: 22px;
-
+  font-size: 24px;
   z-index: 100;
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
-/* BOTTOM NAVIGATION BAR */
+/* BOTTOM NAVIGATION */
 .bottom-nav {
   position: fixed;
   bottom: 0;
@@ -94,11 +100,11 @@ body {
   width: 100%;
   height: 70px;
   background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 0.5px solid rgba(255, 255, 255, 0.2);
   z-index: 20;
 }
 
@@ -110,14 +116,20 @@ body {
   color: #8e8e8e;
   transition: color 0.2s;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 11px;
+  font-weight: 500;
 }
 
 .nav-item img {
   width: 24px;
   height: 24px;
-  filter: brightness(0) invert(1); /* make white */
+  filter: brightness(0) invert(1);
   opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.nav-item span {
+  font-size: 11px;
 }
 
 .nav-item.active {
@@ -128,8 +140,16 @@ body {
   opacity: 1;
 }
 
-/* Adjust sound button position to avoid overlap */
-#sound-toggle {
-  bottom: 90px;  /* move up above bottom nav */
+/* Safe area for notches */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .bottom-nav {
+    padding-bottom: env(safe-area-inset-bottom);
+    height: calc(70px + env(safe-area-inset-bottom));
+  }
+  #post-container {
+    bottom: calc(70px + env(safe-area-inset-bottom));
+  }
+  #sound-toggle {
+    bottom: calc(90px + env(safe-area-inset-bottom));
+  }
 }
-
