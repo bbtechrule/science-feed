@@ -63,3 +63,25 @@ body {
   object-fit: contain;   /* ✅ FULL IMAGE/VIDEO visible */
   background: black;
 }
+
+/* 🔊 SOUND BUTTON */
+#sound-toggle {
+  position: fixed;
+  left: 15px;
+  bottom: 120px;
+
+  width: 55px;
+  height: 55px;
+
+  background: rgba(0,0,0,0.6);
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+  font-size: 22px;
+
+  z-index: 100;
+}
