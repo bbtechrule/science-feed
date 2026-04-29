@@ -1,6 +1,6 @@
 const media = [
   {
-    type:  "video",
+    type: "video",
     url: "https://res.cloudinary.com/dujoufris/video/upload/v1777429071/VID_20260428_191655_519_u8hkhn.mp4"
   },
   {
@@ -17,7 +17,25 @@ const container = document.getElementById("post-container");
 
 let currentIndex = 0;
 let startY = 0;
-let videos = []; // store all videos
+let videos = [];
+let soundEnabled = false; // 🔊 global sound state
+
+// 🔊 CREATE SOUND BUTTON
+const soundBtn = document.createElement("div");
+soundBtn.id = "sound-toggle";
+soundBtn.innerHTML = "🔇";
+document.body.appendChild(soundBtn);
+
+// 🔊 BUTTON CLICK
+soundBtn.onclick = () => {
+  soundEnabled = !soundEnabled;
+
+  videos.forEach(video => {
+    video.muted = !soundEnabled;
+  });
+
+  soundBtn.innerHTML = soundEnabled ? "🔊" : "🔇";
+};
 
 // CREATE POSTS
 media.forEach((item, index) => {
@@ -48,13 +66,7 @@ media.forEach((item, index) => {
     mediaElement.muted = true; // start muted
     mediaElement.playsInline = true;
 
-    // store video
     videos.push(mediaElement);
-
-    // 🔊 Tap to toggle sound
-    mediaElement.addEventListener("click", () => {
-      mediaElement.muted = !mediaElement.muted;
-    });
   }
 
   box.appendChild(mediaElement);
@@ -83,15 +95,13 @@ function updatePosts() {
     post.style.transform = `translateY(${(index - currentIndex) * 100}%)`;
   });
 
-  // 🎬 control videos
-  videos.forEach((video) => {
-    video.pause();
-  });
+  videos.forEach(video => video.pause());
 
   const currentPost = posts[currentIndex];
   const currentVideo = currentPost.querySelector("video");
 
   if (currentVideo) {
+    currentVideo.muted = !soundEnabled;
     currentVideo.play();
   }
 }
