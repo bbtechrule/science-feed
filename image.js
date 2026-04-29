@@ -6,7 +6,7 @@ const allMedia = [
   },
   {
     type: "image",
-    url: "https://res.cloudinary.com/dujoufris/image/upload/v1769152609/cell_1.png_pfomgd.jpg"
+    url: "https://res.cloudinary.com/dujoufris/image/upload/v1777488966/1777488722650_gddqvi.avif"
   },
   {
     type: "video",
