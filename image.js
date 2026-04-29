@@ -17,6 +17,7 @@ const container = document.getElementById("post-container");
 
 let currentIndex = 0;
 let startY = 0;
+let videos = []; // store all videos
 
 // CREATE POSTS
 media.forEach((item, index) => {
@@ -29,23 +30,32 @@ media.forEach((item, index) => {
 
   let mediaElement;
 
+  // IMAGE
   if (item.type === "image") {
     mediaElement = document.createElement("img");
     mediaElement.src = item.url;
     mediaElement.className = "post-img";
   }
 
+  // VIDEO
   if (item.type === "video") {
     mediaElement = document.createElement("video");
     mediaElement.src = item.url;
     mediaElement.className = "post-video";
+
     mediaElement.autoplay = true;
     mediaElement.loop = true;
-    mediaElement.muted = true;
+    mediaElement.muted = true; // start muted
     mediaElement.playsInline = true;
-  }
 
-  // ❌ Buttons removed
+    // store video
+    videos.push(mediaElement);
+
+    // 🔊 Tap to toggle sound
+    mediaElement.addEventListener("click", () => {
+      mediaElement.muted = !mediaElement.muted;
+    });
+  }
 
   box.appendChild(mediaElement);
   post.appendChild(box);
@@ -67,11 +77,23 @@ container.addEventListener("touchend", (e) => {
   if (diff < -50) prevPost();
 });
 
-// UPDATE POSITION
+// UPDATE POSTS + VIDEO CONTROL
 function updatePosts() {
   posts.forEach((post, index) => {
     post.style.transform = `translateY(${(index - currentIndex) * 100}%)`;
   });
+
+  // 🎬 control videos
+  videos.forEach((video) => {
+    video.pause();
+  });
+
+  const currentPost = posts[currentIndex];
+  const currentVideo = currentPost.querySelector("video");
+
+  if (currentVideo) {
+    currentVideo.play();
+  }
 }
 
 // NEXT
