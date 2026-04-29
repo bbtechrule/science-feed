@@ -1,7 +1,7 @@
 const media = [
   {
-    type: "image",
-    url: "https://res.cloudinary.com/dujoufris/image/upload/v1769147997/cld-sample-5.jpg"
+    type:  "video",
+    url: "https://res.cloudinary.com/dujoufris/video/upload/v1777429071/VID_20260428_191655_519_u8hkhn.mp4"
   },
   {
     type: "image",
